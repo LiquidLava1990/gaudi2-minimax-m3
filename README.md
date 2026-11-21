@@ -1,4 +1,6 @@
-# gaudi2-minimax-m3
+# MiniMax-M3 on Intel Gaudi 2 with vLLM (FP8 Mixture-of-Experts)
+
+`gaudi2-minimax-m3` · [all Gaudi 2 recipes](https://github.com/LiquidLava1990)
 
 Experimental recipes for serving MiniMax-M3 (a ~428B-parameter mixture-of-experts model) on one node of 8x Intel Gaudi 2 (HL-225, 96 GB each) with vLLM and vllm-gaudi. The repo holds serve configs, an out-of-tree vLLM plugin, runtime patches, quantization scripts, benchmark scripts, and the design notes written along the way. Both int4-expert and fp8-expert variants were built and measured.
 
