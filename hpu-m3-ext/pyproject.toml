@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hpu-m3-ext"
+version = "0.1.0"
+description = "Out-of-tree vLLM plugin: registers the MiniMax-M3 (text tower) model class on vllm-gaudi and installs the M3 patches (platform MSA gate, int4/fp8 expert-runtime switch). Zero edits to the pinned image; mirrors hpu-moe-ext. Dense-GQA fallback until MSA is validated on-card."
+requires-python = ">=3.10"
+
+# Auto-discovered by vLLM via the general_plugins entry-point group. Named "05." so it loads
+# AFTER the stock vllm-gaudi plugins (01/02/03.hpu_*) AND after hpu-moe-ext ("04.") — the M3
+# arch registration must win over stock, and the expert-runtime refinement wraps hpu-moe-ext's
+# already-installed MoE method.
+[project.entry-points."vllm.general_plugins"]
+"05.hpu_m3_ext" = "hpu_m3_ext:register"
+
+[tool.setuptools]
+packages = ["hpu_m3_ext"]
